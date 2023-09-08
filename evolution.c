@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:06:12 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/07 17:32:49 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:43:48 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ void	*will(void *arg)
 		usleep(30000);
 		pthread_mutex_unlock(&philo->action);
 	}
-	while ((philo->bites < universe->eat_reps || universe->eat_reps == -1)
-		&& !ask_death(universe))
+	while (!ask_death(universe))
 	{
 		if (ft_eat(philo, universe))
-			break ;
-		if (philo->bites == universe->eat_reps)
 			break ;
 		if (ft_sleep(philo, universe))
 			break ;
@@ -89,6 +86,12 @@ void	*go_to_hell(void *arg)
 	philo = (t_philo *)arg;
 	u = (t_universe *)philo->universe;
 	c = create_array(c, u);
+	if (u->eat_reps < 0)
+	{
+		pthread_mutex_lock(&u->freemutex);
+		ft_usleep(u->time_to_die - 1, u);
+		pthread_mutex_unlock(&u->freemutex);
+	}
 	cycle_of_life(i, u, c);
 	return (NULL);
 }

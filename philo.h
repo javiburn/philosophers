@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:44:49 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/07 17:32:42 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:06:23 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_philo
 
 int			new_atoi(const char *nptr);
 int			all_digit(char *num);
-void		message(t_universe *uni, t_philo *p, enum e_message flag);
+void		message(t_universe *uni, t_philo *p, enum e_message flag, int time);
 int			evolving(t_universe *universe);
 void		ft_usleep(int ms, t_universe *universe);
 int			check_death(t_universe *universe, t_philo philo);

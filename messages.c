@@ -6,27 +6,17 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:06:23 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/07 19:18:11 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:35:48 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	message(t_universe *uni, t_philo *philo, enum e_message flag)
+void	message(t_universe *uni, t_philo *philo, enum e_message flag, int t)
 {
-	int				t;
-	struct timeval	time;
-
 	if (ask_death(uni))
 		return ;
 	pthread_mutex_lock(&uni->message);
-	gettimeofday(&time, NULL);
-	t = (time.tv_sec * 1000) + (time.tv_usec / 1000) - uni->start;
-	if (uni->death != 0)
-	{
-		pthread_mutex_unlock(&uni->message);
-		return ;
-	}
 	if (flag == FORK)
 		printf("%d ms	Philo %d has taken a fork\n", t, philo->pos);
 	else if (flag == EAT)

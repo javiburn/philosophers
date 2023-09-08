@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:43:02 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/07 19:19:09 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:06:11 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int	main(int argc, char **argv)
 	pthread_mutex_init(&universe->message, NULL);
 	if (universe->num_philos == 1)
 	{
-		message(universe, &universe->philo[0], FORK);
+		message(universe, &universe->philo[0], FORK, 0);
 		ft_usleep(universe->time_to_die, universe);
-		message(universe, &universe->philo[0], DIE);
+		message(universe, &universe->philo[0], DIE, universe->time_to_die);
 	}
 	else
 		evolving(universe);

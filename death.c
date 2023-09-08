@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:55:11 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/07 19:16:25 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:44:14 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	check_death(t_universe *universe, t_philo philo)
 	int				time;
 	struct timeval	t;
 
-	pthread_mutex_lock(&universe->mutex);
 	gettimeofday(&t, NULL);
 	time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
-	if (time - philo.last_bite > universe->time_to_die)
+	pthread_mutex_lock(&universe->mutex);
+	if (time - philo.last_bite >= universe->time_to_die)
 	{
 		universe->death = 1;
 		if (philo.bites != universe->eat_reps)
@@ -48,7 +48,12 @@ int	check_bites(t_universe *universe, t_philo philo, int **checker)
 			num++;
 		}
 		if (num == universe->num_philos)
+		{
+			pthread_mutex_lock(&universe->mutex);
+			universe->death = 1;
+			pthread_mutex_unlock(&universe->mutex);
 			return (1);
+		}
 	}
 	return (0);
 }
