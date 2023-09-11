@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:06:12 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/11 14:32:12 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:11:40 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	*cycle_of_life(int i, t_universe *u, int *c)
 	pthread_mutex_lock(&u->freemutex);
 	while (1)
 	{
-		usleep(1000);
+		usleep(5000);
 		while (i < u->num_philos)
 		{
 			if (check_death(u, u->philo[i]))
