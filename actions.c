@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:08 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/11 14:46:53 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:45:35 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_pick(t_philo *philo, t_universe *u)
 {
 	int				time;
 
+	if (philo->pos == 0)
+		philo->pos = 1;
 	take_first_fork(philo, u);
 	time = get_time(u);
 	message(u, philo, FORK, time);
