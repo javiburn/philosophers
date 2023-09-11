@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:43:02 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/08 16:06:11 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:21:10 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ static t_universe	*set_philos_pos(t_universe *universe)
 		universe->philo[i].last_bite = 0;
 		universe->philo[i].r_fork = i;
 		universe->philo[i].l_fork = i + 1;
+		universe->forks_status[i] = FREE;
+		universe->forks_status[i + 1] = FREE;
 		if (i + 1 == universe->num_philos)
 			universe->philo[i].l_fork = 0;
 		pthread_mutex_init(&universe->forks[i], NULL);
@@ -83,6 +85,8 @@ t_universe	*big_bang(char **argv)
 		universe->eat_reps = new_atoi(argv[5]);
 	else
 		universe->eat_reps = -1;
+	universe->forks_status = malloc
+		(universe->num_philos * sizeof(enum e_status));
 	universe->philo = malloc(universe->num_philos * sizeof(t_philo));
 	gettimeofday(&universe->time, NULL);
 	universe->start = (universe->time.tv_sec * 1000)
@@ -113,6 +117,7 @@ int	main(int argc, char **argv)
 	pthread_mutex_unlock(&universe->freemutex);
 	destroy_mutexes(universe);
 	free(universe->philo);
+	free(universe->forks_status);
 	free(universe->forks);
 	free(universe->i);
 	free(universe);

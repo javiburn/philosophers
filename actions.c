@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:08 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/08 16:07:45 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:27:06 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,30 @@ int	ft_pick(t_philo *philo, t_universe *universe)
 	int				time;
 	struct timeval	t;
 
-	if (philo->pos % 2 != 0)
+	if (philo->pos % 2 != 0 && universe->forks_status[philo->l_fork] == FREE)
+	{
 		pthread_mutex_lock(&universe->forks[philo->l_fork]);
-	else
+		universe->forks_status[philo->l_fork] = TAKEN;
+	}
+	else if (philo->pos % 2 == 0 && universe->forks_status[philo->r_fork] == FREE)
+	{
 		pthread_mutex_lock(&universe->forks[philo->r_fork]);
+		universe->forks_status[philo->r_fork] = TAKEN;
+	}
 	gettimeofday(&t, NULL);
 	time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
 	message(universe, philo, FORK, time);
-	if (philo->pos % 2 != 0)
+	if (philo->pos % 2 != 0 && universe->forks_status[philo->r_fork] == FREE)
+	{
 		pthread_mutex_lock(&universe->forks[philo->r_fork]);
-	else
+		universe->forks_status[philo->r_fork] = TAKEN;
+	}
+	else if (philo->pos % 2 == 0 && universe->forks_status[philo->l_fork] == FREE)
+	{
 		pthread_mutex_lock(&universe->forks[philo->l_fork]);
+		universe->forks_status[philo->l_fork] = TAKEN;
+
+	}
 	gettimeofday(&t, NULL);
 	time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
 	message(universe, philo, FORK, time);

@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:44:49 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/08 16:06:23 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:20:51 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ enum e_message
 	DIE
 };
 
+enum e_status
+{
+	FREE,
+	TAKEN
+};
+
 typedef struct s_universe
 {
 	int				start;
@@ -39,9 +45,10 @@ typedef struct s_universe
 	int				time_to_sleep;
 	int				eat_reps;
 	int				*i;
+	pthread_t		hell;
+	enum e_status	*forks_status;
 	struct s_philo	*philo;
 	struct timeval	time;
-	pthread_t		hell;
 	pthread_mutex_t	message;
 	pthread_mutex_t	freemutex;
 	pthread_mutex_t	mutex;
@@ -52,8 +59,8 @@ typedef struct s_philo
 {
 	int				pos;
 	int				bites;
-	int				l_fork;
 	int				r_fork;
+	int				l_fork;
 	int				last_bite;
 	pthread_t		philos;
 	t_universe		*universe;
