@@ -6,7 +6,7 @@
 #    By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/21 18:33:35 by jsarabia          #+#    #+#              #
-#    Updated: 2023/09/08 16:44:55 by jsarabia         ###   ########.fr        #
+#    Updated: 2023/09/11 14:43:49 by jsarabia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =				\
 		evolution.c \
 		philo_utils.c \
 		philosophers.c \
+		taking_forks.c \
 
 OBJS = $(SRC:.c=.o)
 

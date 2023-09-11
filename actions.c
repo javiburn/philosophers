@@ -6,45 +6,23 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:46:08 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/11 14:27:06 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:46:53 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_pick(t_philo *philo, t_universe *universe)
+int	ft_pick(t_philo *philo, t_universe *u)
 {
 	int				time;
-	struct timeval	t;
 
-	if (philo->pos % 2 != 0 && universe->forks_status[philo->l_fork] == FREE)
-	{
-		pthread_mutex_lock(&universe->forks[philo->l_fork]);
-		universe->forks_status[philo->l_fork] = TAKEN;
-	}
-	else if (philo->pos % 2 == 0 && universe->forks_status[philo->r_fork] == FREE)
-	{
-		pthread_mutex_lock(&universe->forks[philo->r_fork]);
-		universe->forks_status[philo->r_fork] = TAKEN;
-	}
-	gettimeofday(&t, NULL);
-	time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
-	message(universe, philo, FORK, time);
-	if (philo->pos % 2 != 0 && universe->forks_status[philo->r_fork] == FREE)
-	{
-		pthread_mutex_lock(&universe->forks[philo->r_fork]);
-		universe->forks_status[philo->r_fork] = TAKEN;
-	}
-	else if (philo->pos % 2 == 0 && universe->forks_status[philo->l_fork] == FREE)
-	{
-		pthread_mutex_lock(&universe->forks[philo->l_fork]);
-		universe->forks_status[philo->l_fork] = TAKEN;
-
-	}
-	gettimeofday(&t, NULL);
-	time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
-	message(universe, philo, FORK, time);
-	message(universe, philo, EAT, time);
+	take_first_fork(philo, u);
+	time = get_time(u);
+	message(u, philo, FORK, time);
+	take_second_fork(philo, u);
+	time = get_time(u);
+	message(u, philo, FORK, time);
+	message(u, philo, EAT, time);
 	philo->last_bite = time;
 	philo->bites++;
 	return (0);

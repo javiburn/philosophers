@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:06:23 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/11 14:33:54 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:42:30 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,14 @@ void	ft_usleep(int ms, t_universe *universe)
 		gettimeofday(&t, NULL);
 		time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
 	}
+}
+
+int	get_time(t_universe *universe)
+{
+	int				time;
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	time = ((t.tv_sec * 1000) + (t.tv_usec / 1000)) - universe->start;
+	return (time);
 }

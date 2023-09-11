@@ -6,7 +6,7 @@
 /*   By: jsarabia <jsarabia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:44:49 by jsarabia          #+#    #+#             */
-/*   Updated: 2023/09/11 14:20:51 by jsarabia         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:47:28 by jsarabia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,8 @@ int			ft_eat(t_philo *philo, t_universe *universe);
 int			ft_sleep(t_philo *philo, t_universe *universe);
 int			ft_think(t_philo *philo, t_universe *universe);
 void		destroy_mutexes(t_universe *universe);
+int			get_time(t_universe *universe);
+void		take_first_fork(t_philo *philo, t_universe *u);
+void		take_second_fork(t_philo *philo, t_universe *u);
 
 #endif
