@@ -12,4 +12,4 @@ With the death of one philo, this thread will finish the execution of the rest o
 
 If none of the philosopher dies, the simulation keeps running until we stop it or until they have eaten x times, if we have set this condition.
 
-![Philosophers](https://upload.wikimedia.org/wikipedia/commons/7/7b/An_illustration_of_the_dining_philosophers_problem.png)https://upload.wikimedia.org/wikipedia/commons/7/7b/An_illustration_of_the_dining_philosophers_problem.png)
+![Philosophers](https://upload.wikimedia.org/wikipedia/commons/7/7b/An_illustration_of_the_dining_philosophers_problem.png)
